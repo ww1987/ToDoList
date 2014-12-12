@@ -19,16 +19,16 @@ public class MainActivity extends Activity implements OnNewItemAddedListener{
 
 
     private ListView myListView;
-    private ArrayList<String> todoItems ;
-    private ArrayAdapter<String> aa;
+    private ArrayList<ToDoItem> todoItems ;
+    private ArrayAdapter<ToDoItem> aa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         FragmentManager fm = getFragmentManager();
         ToDoListFragment toDoListFragment = (ToDoListFragment) fm.findFragmentById(R.id.to_do_lidt_fragment);
-        todoItems = new ArrayList<String>();
-        aa = new ArrayAdapter<String>(this,R.layout.todolist_item,todoItems);
+        todoItems = new ArrayList<ToDoItem>();
+        aa = new ArrayAdapter<ToDoItem>(this,R.layout.todolist_item,todoItems);
 
         toDoListFragment.setListAdapter(aa);
     }
@@ -36,7 +36,8 @@ public class MainActivity extends Activity implements OnNewItemAddedListener{
 
     @Override
     public void onNewItemAdded(String newItem) {
-        todoItems.add(newItem);
+        ToDoItem newTodoItem = new ToDoItem(newItem);
+        todoItems.add(newTodoItem);
         aa.notifyDataSetChanged();
     }
 }
